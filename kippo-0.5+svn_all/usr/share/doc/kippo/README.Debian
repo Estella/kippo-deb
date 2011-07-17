@@ -1,0 +1,23 @@
+Note that this Debian package has dispersed the various components 
+of Kippo in the filesystem to suit the 'Debian' way.
+
+Since MySQL backend of Kippo is optional, a database nor mysql-server
+hsa been explicitly set up when installing this package. 
+
+To load in the database schema into a new database, use the sql files
+found in /usr/share/doc/kippo/, which is analogous to the 'docs' folder
+in the Kippo source.
+
+Other files that may change regularly when running Kippo can be found
+in /var/lib/kippo.
+
+Remember to edit /etc/default/kippo and set START_DAEMON to 'yes' if 
+you want to be able to start kippo via /etc/init.d/kippo start. You
+should edit /etc/kippo/kippo.cfg first to ensure your configuration
+is ready before starting Kippo for the first time.
+
+The kippo program itself and the various utility programs are found in
+/usr/bin/. See /usr/share/kippo/utils/README.Debian for how these files
+were named.
+
+This Debian package has been built by mig5 <mig@mig5.net>, July 17 2011.

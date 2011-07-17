@@ -1,0 +1,3 @@
+Building instructions:
+
+dpkg-deb -z8 -Zgzip --build kippo-0.5+svn_$(date +%Y%m%d)_kippo-0.5+svn_all

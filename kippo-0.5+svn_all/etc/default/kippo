@@ -1,0 +1,3 @@
+# Don't start the daemon by default, let the user set it (ideally after editing /etc/kippo/kippo.cfg).
+# Use "yes" (without quotes) to make /etc/init.d/kippo start the Kippo honeypot.
+START_DAEMON=no

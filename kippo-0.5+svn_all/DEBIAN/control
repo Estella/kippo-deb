@@ -1,0 +1,11 @@
+Section: python
+Priority: extra
+Maintainer: Miguel Jacq <mig@mig5.net>
+Depends: python, python-twisted, python-crypto, python-mysqldb
+Homepage: http://code.google.com/p/kippo/
+Package: kippo
+Version: 0.5+svn20110717
+Architecture: all
+Description: A medium-interaction SSH honeypot written in Python.
+ Kippo is a medium interaction SSH honeypot designed to log brute force attacks and, most importantly, the entire shell interaction performed by the attacker.
+ Kippo is inspired, but not based on Kojoney.

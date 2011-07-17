@@ -1,0 +1,10 @@
+Note: the Kippo utils normally found in this directory have been 
+renamed with kippo- prefixes and stored in /usr/bin.
+
+These are:
+
+convert32.py	-> kippo-convert32
+createfs.py	-> kippo-createfs
+passdb.py	-> kippo-passdb
+playlog.py	-> kippo-playlog
+

@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+case "$1" in
+    purge)
+        rm -rf /var/lib/kippo
+	rm -rf /etc/kippo
+	rm -f /usr/lib/python2.6/dist-packages/kippo
+	rm -rf /var/run/kippo
+	rm -rf /var/log/kippo
+	if pgrep -f kippo.tac >/dev/null 2>&1 ; then
+  	  pkill -9 -f kippo.tac
+        fi
+        if which deluser >/dev/null 2>&1 ; then
+            deluser --quiet --system kippo > /dev/null || true
+        else
+            echo >&2 "not removing aegir system account because deluser command was not found"
+        fi
+    ;;
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        rm -f /usr/lib/python2.6/dist-packages/kippo
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+exit 0

@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e
+case "$1" in
+    configure)
+    ln -s /usr/share/pyshared/kippo /usr/lib/python2.6/dist-packages/
+    if ! getent passwd kippo >/dev/null ; then 
+      adduser --quiet --system --no-create-home --group \
+        --home "/var/lib/kippo" \
+        --shell '/bin/bash' \
+        --gecos 'Kippo user,,,' \
+        kippo
+    fi
+    chown -R kippo:kippo /var/lib/kippo
+    chown -R kippo:kippo /var/log/kippo
+    chown kippo:kippo /var/run/kippo
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    rm -f /usr/lib/python2.6/dist-packages/kippo
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+exit 0
