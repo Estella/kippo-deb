@@ -1,35 +1,44 @@
 #!/bin/sh
 set -e
+
+generate_config() {
+  ucf /usr/share/doc/kippo/kippo.cfg.sample /etc/kippo/kippo.cfg
+  ucfr kippo /etc/kippo/kippo.cfg
+  ucf /etc/default/kippo
+}
+
 case "$1" in
-    configure)
-
-    # Prepare the Kippo python modules for use
-    ln -s /usr/share/pyshared/kippo /usr/lib/python2.6/dist-packages/
+  "configure"|"reconfigure"|"upgrade")
+     # Prepare the Kippo python modules for use
+     ln -s /usr/share/pyshared/kippo /usr/lib/python2.6/dist-packages/
    
-    # Add a kippo user and group if they don't already exist.
-    if ! getent passwd kippo >/dev/null ; then 
-      adduser --quiet --system --no-create-home --group \
-        --home "/var/lib/kippo" \
-        --shell '/bin/false' \
-        --gecos 'Kippo user,,,' \
-        kippo
-    fi
+     # Add a kippo user and group if they don't already exist.
+     if ! getent passwd kippo >/dev/null ; then 
+       adduser --quiet --system --no-create-home --group \
+         --home "/var/lib/kippo" \
+         --shell '/bin/false' \
+         --gecos 'Kippo user,,,' \
+         kippo
+     fi
 
-    # Set some permissions on various directories
-    chown -R kippo:kippo /var/lib/kippo
-    chown -R kippo:kippo /var/log/kippo
-    chown kippo:kippo /var/run/kippo
-    ;;
+     # Set some permissions on various directories
+     chown -R kippo:kippo /var/lib/kippo
+     chown -R kippo:kippo /var/log/kippo
+     chown kippo:kippo /var/run/kippo
 
-    abort-upgrade|abort-remove|abort-deconfigure)
+     generate_config
+;;
 
-    # Remove the link to the python modules
-    rm -f /usr/lib/python2.6/dist-packages/kippo
-    ;;
+  abort-upgrade|abort-remove|abort-deconfigure)
 
-    *)
-        echo "postinst called with unknown argument \`$1'" >&2
-        exit 1
-    ;;
+  # Remove the link to the python modules
+  rm -f /usr/lib/python2.6/dist-packages/kippo
+;;
+
+  *)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+;;
 esac
+
 exit 0
