@@ -2,20 +2,28 @@
 set -e
 case "$1" in
     configure)
+
+    # Prepare the Kippo python modules for use
     ln -s /usr/share/pyshared/kippo /usr/lib/python2.6/dist-packages/
+   
+    # Add a kippo user and group if they don't already exist.
     if ! getent passwd kippo >/dev/null ; then 
       adduser --quiet --system --no-create-home --group \
         --home "/var/lib/kippo" \
-        --shell '/bin/bash' \
+        --shell '/bin/false' \
         --gecos 'Kippo user,,,' \
         kippo
     fi
+
+    # Set some permissions on various directories
     chown -R kippo:kippo /var/lib/kippo
     chown -R kippo:kippo /var/log/kippo
     chown kippo:kippo /var/run/kippo
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
+
+    # Remove the link to the python modules
     rm -f /usr/lib/python2.6/dist-packages/kippo
     ;;
 

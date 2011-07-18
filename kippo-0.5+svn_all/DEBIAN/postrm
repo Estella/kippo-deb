@@ -2,14 +2,21 @@
 set -e
 case "$1" in
     purge)
+
+        # Remove Kippo data
         rm -rf /var/lib/kippo
 	rm -rf /etc/kippo
 	rm -f /usr/lib/python2.6/dist-packages/kippo
 	rm -rf /var/run/kippo
 	rm -rf /var/log/kippo
+
+        # Ensure kippo has stopped. @TODO not sure this is really required,
+        # but had problems removing the user if Kippo was still running.
 	if pgrep -f kippo.tac >/dev/null 2>&1 ; then
   	  pkill -9 -f kippo.tac
         fi
+
+        # Delete the kippo user if we can
         if which deluser >/dev/null 2>&1 ; then
             deluser --quiet --system kippo > /dev/null || true
         else
@@ -17,6 +24,8 @@ case "$1" in
         fi
     ;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+
+        # Remove the link to the python modules
         rm -f /usr/lib/python2.6/dist-packages/kippo
     ;;
 
