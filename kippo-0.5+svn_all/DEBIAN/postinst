@@ -2,9 +2,9 @@
 set -e
 
 generate_config() {
-  ucf /usr/share/doc/kippo/kippo.cfg.sample /etc/kippo/kippo.cfg
+  ucf --three-way /usr/share/doc/kippo/kippo.cfg.sample /etc/kippo/kippo.cfg
   ucfr kippo /etc/kippo/kippo.cfg
-  ucf /etc/default/kippo
+  ucf --three-way /usr/share/doc/kippo/kippo.default.sample /etc/default/kippo
 }
 
 case "$1" in
