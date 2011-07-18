@@ -16,7 +16,7 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="Starts and stops the kippo honeypot"
+DESC="kippo"
 NAME=kippo
 KIPPO_USER=kippo
 DAEMON=/usr/bin/twistd
@@ -43,7 +43,6 @@ SCRIPTNAME=/etc/init.d/$NAME
 #
 do_start()
 {
-	echo "Starting $NAME..."
 	# Return
 	#   0 if daemon has been started
 	#   1 if daemon was already running
@@ -63,7 +62,7 @@ do_start()
 #
 do_stop()
 {
-	echo "Stopping $NAME..."
+        log_daemon_msg "Stopping $DESC" "$NAME"
 	start-stop-daemon --stop --quiet --pidfile $PIDFILE
 	# Many daemons don't delete their pidfiles when they exit.
 	rm -f $PIDFILE
