@@ -1,3 +1,4 @@
+/etc/init.d/kippo
 /etc/kippo/kippo.cfg
 /etc/default/kippo
 /var/lib/kippo/data/userdb.txt
