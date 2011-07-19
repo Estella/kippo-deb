@@ -20,6 +20,10 @@ case "$1" in
      chmod 750 /var/lib/kippo
      chown -R kippo:kippo /var/log/kippo
      chmod 750 /var/lib/kippo
+
+     # Register the init.d script with update-rc.d
+     update-rc.d kippo defaults >/dev/null
+
 ;;
 
   abort-upgrade|abort-remove|abort-deconfigure)
