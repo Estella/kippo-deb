@@ -20,8 +20,6 @@ case "$1" in
      chmod 750 /var/lib/kippo
      chown -R kippo:kippo /var/log/kippo
      chmod 750 /var/lib/kippo
-     chown kippo:kippo /var/run/kippo
-     chmod 700 /var/run/kippo
 ;;
 
   abort-upgrade|abort-remove|abort-deconfigure)

@@ -20,12 +20,16 @@ DESC="kippo"
 NAME=kippo
 KIPPO_USER=kippo
 DAEMON=/usr/bin/twistd
-PIDFILE=/var/run/$NAME/$NAME.pid
+RUNDIR=/var/run/$NAME
+PIDFILE=$RUNDIR/$NAME.pid
 DAEMON_ARGS="-y /usr/share/kippo/kippo.tac -l /var/log/kippo/kippo.log --pidfile $PIDFILE"
 SCRIPTNAME=/etc/init.d/$NAME
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0
+
+# Create RUNDIR if it doesn't exist
+[ -d "$RUNDIR" ] || mkdir -p "$RUNDIR" && chown $KIPPO_USER "$RUNDIR"
 
 # Read configuration variable file if it is present
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
