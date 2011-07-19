@@ -1,4 +1,3 @@
 /etc/kippo/kippo.cfg
 /etc/default/kippo
-# @TODO should probably not be a conffile but needs to already exist.
 /var/lib/kippo/data/userdb.txt
