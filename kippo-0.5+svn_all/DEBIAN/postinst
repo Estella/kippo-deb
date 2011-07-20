@@ -15,6 +15,11 @@ case "$1" in
          kippo
      fi
 
+     # Let's create the initial userdb.txt if it doesn't already exist
+     if [ ! -f /var/lib/kippo/data/userdb.txt ]; then
+       echo "root:0:123456" > /var/lib/kippo/data/userdb.txt
+     fi
+
      # Set some permissions on various directories
      chown -R kippo:kippo /var/lib/kippo
      chmod 750 /var/lib/kippo
