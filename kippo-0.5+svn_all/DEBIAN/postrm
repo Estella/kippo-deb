@@ -20,7 +20,7 @@ case "$1" in
         if which deluser >/dev/null 2>&1 ; then
             deluser --quiet --system kippo > /dev/null || true
         else
-            echo >&2 "not removing aegir system account because deluser command was not found"
+            echo >&2 "not removing kippo system account because deluser command was not found"
         fi
 
 	# De-register the init script from update-rc.d
